@@ -1,1 +1,14 @@
 {% extends 'base.html' %}
+
+{% block title %}
+Ralph's Adopt A Pet Home Page
+{% endblock %}
+
+{% block content %}
+<ol>
+{% for pet in all_pets %}
+<li>Name: <b>{{pet.name}}</b> - Species: {{pet.species}}<br>
+Age: {{pet.age}} - Notes: {{pet.notes}} <br><br></li>
+{% endfor %}
+</ol>
+{% endblock %}

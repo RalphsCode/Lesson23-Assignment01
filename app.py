@@ -38,7 +38,19 @@ def add_pet():
     form = AddPet()
     if form.validate_on_submit(): # only works on the post request
         name = form.name.data
-        flash(f"New Pet {name} Added Successfully.")
+        species = form.species.data
+        photo_url = form.photo_url.data
+        age = form.age.data
+        notes = form.notes.data
+        available = True
+
+        new_pet = Pet(name=name, species=species, photo_url=photo_url, age=age, notes=notes, available=available)
+
+        with app.app_context():
+            db.session.add(new_pet)
+            db.session.commit()
+
+        flash(f"New {species}; {name} Added Successfully.")
         return redirect('/')
     else:
         return render_template('add_pet.html', form=form)

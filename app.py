@@ -32,8 +32,13 @@ def home():
     return render_template('home.html', all_pets=all_pets)
 
 
-@app.route('/add')
+@app.route('/add', methods=['GET', 'POST'])
 def add_pet():
     """ Page with a form to add a new pet to the database """
     form = AddPet()
-    return render_template('add_pet.html', form=form)
+    if form.validate_on_submit(): # only works on the post request
+        name = form.name.data
+        flash(f"New Pet {name} Added Successfully.")
+        return redirect('/')
+    else:
+        return render_template('add_pet.html', form=form)

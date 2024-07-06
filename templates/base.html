@@ -9,9 +9,11 @@
 <body>
     <h1 class="text-secondary">Ralph's Pet Adoption App</h1><br><br>
     <!-- Display the flashed messages -->
-    {% for msg in get_flashed_messages() %}
-        <p>{{msg}}</p>
-    {% endfor %}
+    <div class="container-fluid bg-success text-white">
+        {% for msg in get_flashed_messages() %}
+            <p>{{msg}}</p>
+        {% endfor %}
+    </div>
     <!-- Display Page Content -->
     {% block content %}
 

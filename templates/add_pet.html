@@ -8,8 +8,11 @@ Ralph's Adopt A Pet - Add a pet
 <div class="container">
 <h2>Add a pet</h2>
 <div class="form-control">
-<form action="/">
-    {% for field in form %}
+<form action="/add" method="post">
+    {{ form.hidden_tag() }}
+    
+    {% for field in form 
+        if field.widget.input_type != 'hidden' %} <!-- hide CSRF field-->
     <p>
         {{field.label}}<br>
         {{field}}

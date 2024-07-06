@@ -5,10 +5,20 @@ Ralph's Adopt A Pet Home Page
 {% endblock %}
 
 {% block content %}
+<div class="container">
 <ol>
 {% for pet in all_pets %}
-<li>Name: <b>{{pet.name}}</b> - Species: {{pet.species}}<br>
-Age: {{pet.age}} - Notes: {{pet.notes}} <br><br></li>
+<li><img src="{{pet.photo_url}}" width="150"> <br>
+<b>{{pet.name}}</b><br>
+Available: 
+    {% if pet.available %}
+        <b class="text-success">&check; YES!</b>
+    {% else %}
+        <b class="text-warning">X</b> - not available
+    {% endif %}
+<br>
+Age: {{pet.age}}<br>Notes: {{pet.notes}} <br><br></li>
 {% endfor %}
 </ol>
+</div>
 {% endblock %}

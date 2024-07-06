@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Ralph's Adopt A Pet - Add a pet
+{% endblock %}
+
+{% block content %}
+<div class="container">
+<h2>Add a pet</h2>
+<div class="form-control">
+<form action="/">
+    {% for field in form %}
+    <p>
+        {{field.label}}<br>
+        {{field}}
+    </p>
+    {% endfor %}
+    <!-- Cancel & Submit Buttons -->
+    <a href="/" class="btn btn-warning">Cancel</a>
+    <button class="btn btn-success">Submit</button>
+</form>
+</div>
+{% endblock %}

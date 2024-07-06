@@ -5,6 +5,7 @@ from flask import Flask, render_template, redirect, flash
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_sqlalchemy import SQLAlchemy
 from models import db, connect_db, Pet
+from forms import AddPet
 
 # Define the App
 app = Flask(__name__)  # creating an instance of the Flask Class
@@ -26,5 +27,13 @@ with app.app_context():
 ###  ROUTES  ###
 @app.route('/')
 def home():
+    """ App Home Page """
     all_pets = Pet.query.all()
     return render_template('home.html', all_pets=all_pets)
+
+
+@app.route('/add')
+def add_pet():
+    """ Page with a form to add a new pet to the database """
+    form = AddPet()
+    return render_template('add_pet.html', form=form)

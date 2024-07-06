@@ -6,19 +6,22 @@ Ralph's Adopt A Pet Home Page
 
 {% block content %}
 <div class="container">
-<ol>
-{% for pet in all_pets %}
-<li><img src="{{pet.photo_url}}" width="150"> <br>
-<b>{{pet.name}}</b><br>
-Available: 
-    {% if pet.available %}
-        <b class="text-success">&check; YES!</b>
-    {% else %}
-        <b class="text-warning">X</b> - not available
-    {% endif %}
-<br>
-Age: {{pet.age}}<br>Notes: {{pet.notes}} <br><br></li>
-{% endfor %}
-</ol>
+    <!-- Add Pet Button -->
+    <a href="/add" class="btn btn-success">Add Pet</a><br><br>
+    <ol>
+    {% for pet in all_pets %}
+        <li><img src="{{pet.photo_url}}" width="150"> <br>
+        <b>{{pet.name}}</b><br>
+        Available: 
+            {% if pet.available %}
+                <b class="text-success">&check; YES!</b>
+            {% else %}
+                <b class="text-warning">X</b> - not available
+            {% endif %}
+        <br>
+        Age: {{pet.age}}<br>Notes: {{pet.notes}} <br><br></li>
+    {% endfor %}
+    </ol>
+
 </div>
 {% endblock %}

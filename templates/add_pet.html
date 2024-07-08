@@ -10,12 +10,16 @@ Ralph's Adopt A Pet - Add a pet
 <div class="form-control">
 <form action="/add" method="post">
     {{ form.hidden_tag() }}
-    
     {% for field in form 
         if field.widget.input_type != 'hidden' %} <!-- hide CSRF field-->
     <p>
         {{field.label}}<br>
         {{field}}
+
+        <!-- Display any errors arising from the WTForm validators -->
+        {% for err in field.errors %}
+        {{err}}
+        {% endfor %}
     </p>
     {% endfor %}
     <!-- Cancel & Submit Buttons -->

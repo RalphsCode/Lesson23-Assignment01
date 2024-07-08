@@ -5,7 +5,7 @@ from flask import Flask, render_template, redirect, flash
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_sqlalchemy import SQLAlchemy
 from models import db, connect_db, Pet
-from forms import AddPet
+from forms import AddPet, EditPet
 
 # Define the App
 app = Flask(__name__)  # creating an instance of the Flask Class
@@ -27,7 +27,7 @@ with app.app_context():
 ###  ROUTES  ###
 @app.route('/')
 def home():
-    """ App Home Page """
+    """ App Home Page, Lists All Pets """
     all_pets = Pet.query.all()
     return render_template('home.html', all_pets=all_pets)
 
@@ -58,22 +58,18 @@ def add_pet():
 
 @app.route('/<int:id>', methods=['GET', 'POST'])
 def pet_details(id):
-    """ Page with a form to add a new pet to the database """
+    """ Page with a form to view and/or edit a pet """
     display_pet = Pet.query.get_or_404(id)
-    form = AddPet()
+    form = EditPet(obj=display_pet)
     if form.validate_on_submit(): # only works on the post request
-        display_pet.name = form.name.data
-        display_pet.species = form.species.data
         display_pet.photo_url = form.photo_url.data
-        display_pet.age = form.age.data
         display_pet.notes = form.notes.data
         display_pet.available = form.available.data
 
-        with app.app_context():
-            db.session.add(display_pet)
-            db.session.commit()
+        # with app.app_context():
+        db.session.commit()
 
-        flash(f"{display_pet.name}, Updated successfully.")
-        return redirect('/<int: id>')
+        flash(f"{display_pet.name} updated successfully.")
+        return redirect(f'/{display_pet.id}')
     else:
         return render_template('view_pet.html', form=form, display_pet=display_pet)

@@ -8,6 +8,8 @@ Ralph's Adopt A Pet Home Page
 <div class="container">
     <!-- Add Pet Button -->
     <a href="/add" class="btn btn-success">Add Pet</a><br><br>
+
+    <!-- Display all pets in the adopt dattabase -->
     <ol>
     {% for pet in all_pets %}
         <li>
@@ -16,18 +18,16 @@ Ralph's Adopt A Pet Home Page
             {% else %}
                 <i>No Photo Yet.</i><br>
             {% endif %}
-        <b><a href="/{{pet.id}}">{{pet.name}}</a></b><br>
-        Type: {{pet.species.capitalize()}}<br>
-        Available: 
+            <b><a href="/{{pet.id}}">{{pet.name}}</a></b></li>
             {% if pet.available %}
-                <b class="text-success">&check; YES!</b>
-            {% else %}
-                <b class="text-warning">X</b> - not available
+            <b class="text-white">&check; Available</b>
             {% endif %}
-        <br>
-        Age: {{pet.age}}<br>Notes: {{pet.notes}} <br><br></li>
+            <br><br>
+        </li>
     {% endfor %}
     </ol>
-
+ <!-- Add Pet Button -->
+ <a href="/add" class="btn btn-success">Add Pet</a>
+ <br><br>
 </div>
 {% endblock %}

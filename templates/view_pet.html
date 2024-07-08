@@ -6,6 +6,7 @@ Ralph's Adopt A Pet - View Pet
 
 {% block content %}
 <div class="container">
+    <!-- Display the Details about a Pet -->
     <b>{{display_pet.name}}</b><br>
         {% if display_pet.photo_url %}
                 <img src="{{display_pet.photo_url}}" width="150"> <br>
@@ -15,13 +16,36 @@ Ralph's Adopt A Pet - View Pet
                 Type: {{display_pet.species.capitalize()}}<br>
         Available: 
             {% if display_pet.available %}
-                <b class="text-success">&check; YES!</b>
+                <b class="text-white">&check; YES!</b>
             {% else %}
-                <b class="text-warning">X</b> - not available
+                <b class="text-Danger">X<i>  Not Available</i></b>
             {% endif %}
         <br>
         Age: {{display_pet.age}}<br>Notes: {{display_pet.notes}} <br><br>
-    <!-- Home Page Button -->
+    <!-- View all pets Button -->
     <a href="/" class="btn btn-success">Back to all Pets</a><br><br>
+
+    <!-- Edit the details for the pet displayed above -->
+    <h3>Edit Pet</h3>
+    <div class="form-control">
+        <form action="/{{display_pet.id}}" method="post">
+            {{ form.hidden_tag() }}
+            {% for field in form 
+                if field.widget.input_type != 'hidden' %} <!-- hide CSRF field-->
+            <p>
+                {{field.label}}<br>
+                {{field}}
+
+                <!-- Display any errors arising from the WTForm validators -->
+                {% for err in field.errors %}
+                {{err}}
+                {% endfor %}
+            </p>
+            {% endfor %}
+            <!-- Cancel & Submit Buttons -->
+            <a href="/{{display_pet.id}}" class="btn btn-warning">Cancel</a>
+            <button class="btn btn-success">Submit</button>
+        </form>
+    </div>
 </div>
 {% endblock %}

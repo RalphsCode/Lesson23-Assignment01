@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <title>{% block title %} {% endblock %}</title>
 </head>
-<body class="bg-light">
-    <h1 class="text-secondary">Ralph's Pet Adoption App</h1><br><br>
+<body class="bg-warning">
+    <h1 class="text-white" style="text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5)"><i>Ralph's Pet Adoption App</i></h1><br><br>
     <!-- Display the flashed messages -->
     <div class="container-fluid bg-success text-white">
         {% for msg in get_flashed_messages() %}

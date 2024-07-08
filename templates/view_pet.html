@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Ralph's Adopt A Pet - View Pet
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <b>{{display_pet.name}}</b><br>
+        {% if display_pet.photo_url %}
+                <img src="{{display_pet.photo_url}}" width="150"> <br>
+            {% else %}
+                <i>No Photo Yet.</i><br>
+            {% endif %}
+                Type: {{display_pet.species.capitalize()}}<br>
+        Available: 
+            {% if display_pet.available %}
+                <b class="text-success">&check; YES!</b>
+            {% else %}
+                <b class="text-warning">X</b> - not available
+            {% endif %}
+        <br>
+        Age: {{display_pet.age}}<br>Notes: {{display_pet.notes}} <br><br>
+    <!-- Home Page Button -->
+    <a href="/" class="btn btn-success">Back to all Pets</a><br><br>
+</div>
+{% endblock %}

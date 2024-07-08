@@ -16,7 +16,7 @@ Ralph's Adopt A Pet Home Page
             {% else %}
                 <i>No Photo Yet.</i><br>
             {% endif %}
-        <b>{{pet.name}}</b><br>
+        <b><a href="/{{pet.id}}">{{pet.name}}</a></b><br>
         Type: {{pet.species.capitalize()}}<br>
         Available: 
             {% if pet.available %}

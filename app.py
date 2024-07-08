@@ -50,7 +50,30 @@ def add_pet():
             db.session.add(new_pet)
             db.session.commit()
 
-        flash(f"New {species}; {name} Added Successfully.")
+        flash(f"New {species.capitalize()}: {name}, added successfully.")
         return redirect('/')
     else:
         return render_template('add_pet.html', form=form)
+    
+
+@app.route('/<int:id>', methods=['GET', 'POST'])
+def pet_details(id):
+    """ Page with a form to add a new pet to the database """
+    display_pet = Pet.query.get_or_404(id)
+    form = AddPet()
+    if form.validate_on_submit(): # only works on the post request
+        display_pet.name = form.name.data
+        display_pet.species = form.species.data
+        display_pet.photo_url = form.photo_url.data
+        display_pet.age = form.age.data
+        display_pet.notes = form.notes.data
+        display_pet.available = form.available.data
+
+        with app.app_context():
+            db.session.add(display_pet)
+            db.session.commit()
+
+        flash(f"{display_pet.name}, Updated successfully.")
+        return redirect('/<int: id>')
+    else:
+        return render_template('view_pet.html', form=form, display_pet=display_pet)
